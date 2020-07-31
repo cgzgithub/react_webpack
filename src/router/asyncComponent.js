@@ -1,5 +1,5 @@
 import React from "react";
-// import { inject_unmount } from "@/utils/unmount";
+import { inject_unmount } from "@/utils/unmount";
 const AsyncComponent = loadComponent => {
     class AsyncComponent extends React.Component {
         state = {
@@ -33,7 +33,7 @@ const AsyncComponent = loadComponent => {
             return Component ? <Component {...this.props} /> : null;
         }
     }
-    return AsyncComponent;
+    return inject_unmount(AsyncComponent);
 };
 
 export default AsyncComponent;

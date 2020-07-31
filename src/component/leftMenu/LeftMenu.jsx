@@ -1,17 +1,21 @@
 import React from 'react';
 import {Menu} from 'antd'
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+const styles = require('./LeftMenu.module.less')
 
 const { SubMenu } = Menu;
-export default class Leftmenu extends React.Component{
+export default @withRouter class Leftmenu extends React.Component{
     render() {
         return(
-          <div>llllllllll
-                    <Menu>
+          <div className={styles.container}>
+          <Menu mode="inline">
           <Menu.Item key="1" >
-            Navigation One
+            <Link to="/">Navigation One</Link>
+            
           </Menu.Item>
           <Menu.Item key="2" >
-            Navigation Two
+          <Link to="/service">Navigation Two</Link>
           </Menu.Item>
           <SubMenu key="sub1"  title="Navigation Two">
             <Menu.Item key="3">Option 3</Menu.Item>
@@ -33,7 +37,7 @@ export default class Leftmenu extends React.Component{
             </a>
           </Menu.Item>
         </Menu>
-          </div>
+        </div>
 
         )
     }
