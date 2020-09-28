@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "@/component/header/Header";
 import LeftMenu from "@/component/leftMenu/LeftMenu";
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import AsyncComponent from "@/router/AsyncComponent";
 const Home = AsyncComponent(() => import("@/view/home/Home"))
 const About = AsyncComponent(() => import("@/view/about/About"))
@@ -15,15 +15,13 @@ export default class Layout extends React.Component{
                 <Header />
                 <div className={styles.layoutBody}>
                     <LeftMenu />
-                    <Router>
                         <div>
                             <Switch>
-                                <Route path="/" exact component={Home} />
+                                <Route exact  path="/"  component={Home} />
                                 <Route path="/service" component={Service} />
                                 <Route path="/about" component={About} />
                             </Switch>
                         </div>
-                    </Router>
                 </div>
             </div>
         )
