@@ -1,6 +1,7 @@
 import React from 'react';
 import {Menu, Button} from 'antd'
 import { Link, withRouter } from "react-router-dom";
+import {menuData} from '@/router/route.js'
 import {
   AppstoreOutlined,
   MenuUnfoldOutlined,
@@ -22,6 +23,20 @@ class Leftmenu extends React.Component{
         collapsed:!this.state.collapsed
       })
     }
+    menuTag = function deep(menuData){
+      if(menuData && menuData.length > 0){
+        return menuData.map(item => {
+          if(item.children && item.children.length > 0){
+            return (<SubMenu key={item.path} title={item.title} icon={item.icon}>
+              {deep(item.children)}
+            </SubMenu>)
+          }
+          return (<Menu.Item key={item.path} icon={item.icon}>
+            <Link to={{pathname:item.path,state:item.cont?item.cont:item.title}}>{item.title}</Link>
+          </Menu.Item>)
+        })
+      }
+    }
     render() {
       let defaultSelectedKeys = this.props.location.pathname
       console.log(defaultSelectedKeys)
@@ -36,27 +51,8 @@ class Leftmenu extends React.Component{
           mode="inline"
           theme="light"
            >
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            <Link to="/">Navigation One</Link>
-          </Menu.Item>
-          <Menu.Item key="/service" icon={<MailOutlined />} >
-          <Link to="/service">Navigation Two</Link>
-          </Menu.Item>
-          <SubMenu key="sub1" icon={<DesktopOutlined />}  title="Navigation Two">
-            <Menu.Item key="3" icon={<DesktopOutlined />}>Option 3</Menu.Item>
-            <Menu.Item key="4">Option 4</Menu.Item>
-            <SubMenu key="sub12" icon={<DesktopOutlined />} title="Submenu">
-              <Menu.Item key="56">Option 5</Menu.Item>
-              <Menu.Item key="65">Option 6</Menu.Item>
-            </SubMenu>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<ContainerOutlined />}  title="Navigation Three">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-          </SubMenu>
-        </Menu>
+             {this.menuTag(menuData)}
+          </Menu>
         </div>
 
         )

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "@/component/header/Header";
 import LeftMenu from "@/component/leftMenu/LeftMenu";
+import MainView from "./MainView";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import AsyncComponent from "@/router/AsyncComponent";
 const Home = AsyncComponent(() => import("@/view/home/Home"))
@@ -15,13 +16,7 @@ export default class Layout extends React.Component{
                 <Header />
                 <div className={styles.layoutBody}>
                     <LeftMenu />
-                        <div>
-                            <Switch>
-                                <Route exact  path="/"  component={Home} />
-                                <Route path="/service" component={Service} />
-                                <Route path="/about" component={About} />
-                            </Switch>
-                        </div>
+                    <MainView />
                 </div>
             </div>
         )
