@@ -1,11 +1,12 @@
 import React from 'react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
-import apis from '@/api/apis'
+import apis from '@/api/apis';
+import baseConfig from '@/api/baseConfig'
 
 
 export default class Home extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           markdown: '# This is a H1  \n## This is a H2  \n###### This is a H6',
         };
@@ -17,7 +18,7 @@ export default class Home extends React.Component{
     }
     componentDidMount(){
         console.log('apis>>>>>>>>>>>',apis)
-        apis.getAllArticleList().then(res => {
+        apis.getPublicArticleList().then(res => {
             console.log(res)
         })
     }

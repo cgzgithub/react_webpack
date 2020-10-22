@@ -1,6 +1,10 @@
-import {request} from './request'
+import {request} from './request';
 
 export default request({
-    getAllArticleList:'/api/article/articleAll',
-    getPublicArticleList:'/api/article/articleAllPublic'
+    getAllArticleList:{
+        url:'/api/article/articleAll'
+    },
+    getPublicArticleList:{
+        url:'/api/article/articleAllPublic'
+    }
 })
