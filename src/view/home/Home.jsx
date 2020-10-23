@@ -17,10 +17,10 @@ export default class Home extends React.Component{
         this.setState({ markdown: value });
     }
     componentDidMount(){
-        console.log('apis>>>>>>>>>>>',apis)
-        apis.getPublicArticleList().then(res => {
-            console.log(res)
-        })
+        // console.log('apis>>>>>>>>>>>',apis)
+        // apis.getPublicArticleList().then(res => {
+        //     console.log(res)
+        // })
     }
     render() {
         return(
