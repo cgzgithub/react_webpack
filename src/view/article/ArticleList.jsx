@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react';
+import {withRouter} from 'react-router-dom'
 import apis from '@/api/apis';
 import {Table,Tag,Space} from 'antd'
 
 
 
-export default class ArticleList extends React.Component{
+class ArticleList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -13,6 +14,7 @@ export default class ArticleList extends React.Component{
     }
     goDetail(v){
         console.log(v)
+        this.props.history.push({pathname:'/article/articleDetail',query:{id:v}})
     }
     componentDidMount(){
         console.log('apis>>>>>>>>>>>',apis)
@@ -28,17 +30,19 @@ export default class ArticleList extends React.Component{
             {
                 title:'名称',
                 dataIndex:'articleTitle',
-                key:'articleTitle',
-                render: text => <a onClick={this.goDetail.bind(this,index)}>{text}</a>
+                key:'articleTitle', 
+                render: (text,record) => <a onClick={this.goDetail.bind(this,record.articleId)}>{text}</a>
             },
             {
                 title:'描述',
                 dataIndex:'articleDesc',
+                sorter:true,
                 key:'articleDesc'
             },
             {
                 title:'创建时间',
                 dataIndex:'articleCdate',
+                sorter:true,
                 key:'articleCdate',
             },
             {
@@ -72,3 +76,4 @@ export default class ArticleList extends React.Component{
         )
     }
 }
+export default withRouter(ArticleList)

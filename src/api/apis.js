@@ -6,5 +6,8 @@ export default request({
     },
     getPublicArticleList:{
         url:'/api/article/articleAllPublic'
-    }
+    },
+    articleGetById:{
+        url:'/api/article/articleGetById'
+    },
 })
