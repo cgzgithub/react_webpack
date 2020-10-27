@@ -642,6 +642,8 @@
     font-size: 85%;
     line-height: 1.45;
     border-radius: 3px;
+    background-color: #272822;
+    color: rgb(206, 203, 203);
 }
 
 .markdown-body pre code {
@@ -704,15 +706,15 @@
 }
 
 /* 高亮 */
-.markdown-body .hljs {
+/* .markdown-body .hljs {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
     color: #333;
     background: #f2f3f1
-}
+} */
 
-.markdown-body .hljs-comment, .hljs-quote {
+/* .markdown-body .hljs-comment, .hljs-quote {
     color: #998;
     font-style: italic
 }
@@ -780,4 +782,4 @@
 
 .markdown-body .hljs-strong {
     font-weight: bold
-}
+} */

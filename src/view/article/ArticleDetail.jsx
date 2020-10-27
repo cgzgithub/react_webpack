@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import hljs from 'highlight.js'
 
-// import '../../markdown.css'
+import '../../markdown.css'
 import 'highlight.js/styles/monokai.css'
 // import E from 'wangeditor'
 import api from '@/api/apis';
