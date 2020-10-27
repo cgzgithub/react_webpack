@@ -3,7 +3,7 @@ import '../../markdown.css'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai.css'
 import E from 'wangeditor'
-import { Card } from 'antd';
+import { Card, Form, Input, Switch } from 'antd';
 
 
 export default class ArticleEditer extends React.Component{
@@ -36,7 +36,20 @@ export default class ArticleEditer extends React.Component{
         return(
             <Fragment>
                 <div>
-                    
+                    <Form>
+                        <Form.Item label="文章标题" name="articleTitle" rules={[{required:true,message:'请输入文章标题'}]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="文章描述" name="articleDesc" rules={[{required:true,message:'请输入文章描述'}]}>
+                            <Input.TextArea />
+                        </Form.Item>
+                        <Form.Item label="是否私密" name="private">
+                            <Switch checkedChildren="私密" unCheckedChildren="公开" />
+                        </Form.Item>
+                        <Form.Item label="推荐" name="isRecom">
+                            <Switch checkedChildren="推荐" unCheckedChildren="普通" />
+                        </Form.Item>
+                    </Form>
                 </div>
                 <Card title="富文本内容区">
                     
