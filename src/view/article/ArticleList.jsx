@@ -14,7 +14,7 @@ class ArticleList extends React.Component{
     }
     goDetail(v){
         console.log(v)
-        this.props.history.push({pathname:'/article/articleDetail',query:{id:v}})
+        this.props.history.push({pathname:'/article/articleDetail',state:{id:v}})
     }
     componentDidMount(){
         console.log('apis>>>>>>>>>>>',apis)

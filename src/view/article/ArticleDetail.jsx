@@ -28,7 +28,7 @@ export default class ArticleDetail extends React.Component{
         // this.editor.create()
         
         console.log(this.props.location.query)
-        const articleId = this.props.location.query.id
+        const articleId = this.props.location.state.id
         api.articleGetById({'articleId':articleId}).then(res => {
             console.log(res.data.articleContentHtml)
             this.setState({
