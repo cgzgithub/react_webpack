@@ -1,4 +1,5 @@
 import React,{Fragment} from 'react';
+import api from '@/api/apis'
 import '../../markdown.css'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai.css'
@@ -11,6 +12,7 @@ export default class ArticleEditer extends React.Component{
         super(props)
         this.state = {
             editorContent:``,
+            articleTitle:'',
             articleForm:{
                 articleId:'',
                 userId:1,
@@ -27,8 +29,23 @@ export default class ArticleEditer extends React.Component{
         this.editer = null
     }
     componentDidMount(){
-        document.addEventListener('keydown',this.keyPress)
-        const elemMenu = this.refs.editorElemMenu;
+        const articleId = this.props.location.state.id
+        console.log('id',this.props.location.state.id)
+        api.articleGetById({articleId}).then(res => {
+            console.log('articleGetById',res)
+            let {articleId,articleTitle,articleDesc,publicPrivate,isRecommend,articleContentHtml} = res.data
+            let myData = Object.assign({},this.state.articleForm,{articleId,articleTitle,articleDesc,publicPrivate,isRecommend,articleContentHtml})
+            this.setState({
+                articleForm:myData,
+                articleTitle:res.data.articleTitle
+            })
+            this.refs.myform.setFieldsValue({
+                articleTitle:res.data.articleTitle,
+                articleDesc:res.data.articleDesc,
+                publicPrivate:res.data.publicPrivate
+            })
+            console.log(this.props)
+            const elemMenu = this.refs.editorElemMenu;
         const elemBody = this.refs.editorElemBody;
         this.editor = new E(elemMenu, elemBody);
         this.editor.highlight = hljs
@@ -43,6 +60,10 @@ export default class ArticleEditer extends React.Component{
         this.editor.config.uploadImgShowBase64 = true
         this.editor.create()
         this.editor.txt.html(this.state.articleForm.articleContentHtml)
+
+        })
+        document.addEventListener('keydown',this.keyPress)
+        
     }
     componentWillUnmount() {
         this.editor=null;
@@ -81,15 +102,19 @@ export default class ArticleEditer extends React.Component{
         console.log(v1)
     }
     render() {
+        let {articleId,articleTitle,articleDesc,publicPrivate,isRecommend,articleContentHtml} = this.state.articleForm
+        console.log('articleTitle',articleTitle)
         return(
             <Fragment>
                 <div>
-                    <Form ref="myform" name="basic" onFinish={this.onFinish} onFieldsChange={this.onFieldsChange}>
-                        <Form.Item label="文章标题" name="articleTitle" rules={[{required:true,message:'请输入文章标题'}]}>
-                            <Input value={this.state.articleTitle} />
+                    <div>{articleTitle}</div>
+                    <Form ref="myform" initialValues={{ articleTitle: articleTitle }} name="basic" onFinish={this.onFinish} onFieldsChange={this.onFieldsChange}>
+                        <Form.Item label="文章标题" name="articleTitle" rules={[{required:true,message:'请输入文章标题'}]}
+                        >
+                            <Input  />
                         </Form.Item>
                         <Form.Item label="文章描述" name="articleDesc" rules={[{required:true,message:'请输入文章描述'}]}>
-                            <Input.TextArea />
+                            <Input.TextArea  />
                         </Form.Item>
                         <Form.Item label="是否私密" name="private">
                             <Switch checkedChildren="私密" unCheckedChildren="公开" />
@@ -134,7 +159,7 @@ export default class ArticleEditer extends React.Component{
                         </div>
                         <div style={{paddingLeft:"10px"}}>
                             <div style={{fontWeight:'bold',paddingTop:"10px"}}>效果预览</div>
-                            <div className="markdown-body"  dangerouslySetInnerHTML={{__html:this.state.editorContent}}></div>
+                            <div className="markdown-body"  dangerouslySetInnerHTML={{__html:this.state.articleForm.articleContentHtml}}></div>
                         </div>
                     </div>
                 </Card>

@@ -44,6 +44,7 @@ class MainView extends React.Component{
                         <Route path='/editer/blog' component={ArticleEditer}></Route>
                         <Route path='/editer/record' component={ArticleEditer}></Route>
                         <Route path='/editer/article' component={ArticleEditer}></Route>
+                        <Route path='/article/articleEditor' component={ArticleEditer}></Route>
                         <Route path='/article/articleDetail' component={ArticleDetail}></Route>
                         <Route path='/article/allList' component={ArticleList}></Route>
                         <Route path='/article/blogList' component={ArticleList}></Route>

@@ -13,8 +13,12 @@ class ArticleList extends React.Component{
         }
     }
     goDetail(v){
-        console.log(v)
+        console.log(v,this)
         this.props.history.push({pathname:'/article/articleDetail',state:{id:v}})
+    }
+    goEditor = (v) => {
+        console.log(v,this)
+        this.props.history.push({pathname:'/article/articleEditor',state:{id:v}})
     }
     componentDidMount(){
         console.log('apis>>>>>>>>>>>',apis)
@@ -56,7 +60,7 @@ class ArticleList extends React.Component{
                 key:'action',
                 render: (text,record) => (
                     <Space>
-                        <a>编辑</a>
+                        <a onClick={this.goEditor.bind(this,record.articleId)}>编辑</a>
                         <a>删除</a>
                     </Space>
                 )
